@@ -1,15 +1,17 @@
+footer{
+  display: flex;
+  justify-content: end;
+
+}
 
 .github-link{
   color: var(--muted);
-  position: fixed;
-  right: 40px;
-  bottom: 20px;
-
   text-decoration: none;
 
   font-size: 0.85rem;
-
-  transition: 0.25s;
+  
+  margin: 0 32px;
+  transition: 0.3s ease;
 }
 
 .github-link:hover{
@@ -20,7 +22,7 @@
 }
 
 .game-container{
-  min-height:100vh;
+  min-height:95vh;
 
   display:flex;
   flex-direction:column;
@@ -31,13 +33,14 @@
   gap:1.5rem;
 
   padding:1rem;
+  padding-top: 0;
 }
 
 h1{
   font-size:5rem;
-
   letter-spacing:10px;
-
+  position: relative;
+  bottom: 20px;
   color:var(--snake);
 
   font-family: monospace;
@@ -90,7 +93,7 @@ h1{
   position:relative;
 
   display:grid;
-
+  
   background:
     linear-gradient(
       rgba(156,255,87,0.07) 1px,
@@ -105,7 +108,7 @@ h1{
 
   border:2px solid rgba(156,255,87,0.5);
 
-  border-radius:28px;
+  border-radius: 9px;
 
   overflow:hidden;
 
@@ -191,7 +194,8 @@ h1{
   background:var(--fruit);
 
   border-radius:999px;
-
+  align-self: center;
+  justify-self: center;
   box-shadow:
     0 0 10px var(--fruit-glow),
     0 0 20px var(--fruit-glow);
@@ -206,7 +210,7 @@ h1{
 
   background:rgba(0,0,0,0.2);
 
-  backdrop-filter:blur(10px);
+  /* backdrop-filter:blur(10px); */
 
   display:flex;
   flex-direction:column;
@@ -291,6 +295,7 @@ h1{
     overflow:hidden;
   }
 
+  
   h1{
     font-size:3rem;
     letter-spacing:6px; 

@@ -386,169 +386,174 @@ const CELL_SIZE = isMobile
   ]);
 
   return (
-    <div className="game-container">
-      <h1>SNAKE GAME</h1>
+    <div>
 
-      <div className="top-bar">
-        <div className="panel">
-          <p>Score</p>
-          <span>{score}</span>
+      <div className="game-container">
+        <h1>SNAKE GAME</h1>
+
+        <div className="top-bar">
+          <div className="panel">
+            <p>Score</p>
+            <span>{score}</span>
+          </div>
+
+          <div className="panel">
+            <p>Best</p>
+            <span>{bestScore}</span>
+          </div>
+
+          <div className="panel">
+            <p>Speed</p>
+            <span>
+              {Math.floor((120 - speed) / 5)}
+            </span>
+          </div>
         </div>
 
-        <div className="panel">
-          <p>Best</p>
-          <span>{bestScore}</span>
-        </div>
-
-        <div className="panel">
-          <p>Speed</p>
-          <span>
-            {Math.floor((120 - speed) / 5)}
-          </span>
-        </div>
-      </div>
-
-      <div
-        className="game-board"
-        onTouchStart={handleTouchStart}
-        onTouchEnd={handleTouchEnd}
-        style={{
-          width: GRID_WIDTH * CELL_SIZE,
-          height: GRID_HEIGHT * CELL_SIZE,
-          gridTemplateColumns: `repeat(${GRID_WIDTH}, ${CELL_SIZE}px)`,
-        }}
-      >
-        {Array.from({
-          length: GRID_HEIGHT,
-        }).map((_, row) =>
-          Array.from({
-            length: GRID_WIDTH,
-          }).map((_, col) => {
-            const isSnakeHead =
+        <div
+          className="game-board"
+          onTouchStart={handleTouchStart}
+          onTouchEnd={handleTouchEnd}
+          style={{
+            width: GRID_WIDTH * CELL_SIZE,
+            height: GRID_HEIGHT * CELL_SIZE,
+            gridTemplateColumns: `repeat(${GRID_WIDTH}, ${CELL_SIZE}px)`,
+          }}
+          >
+          {Array.from({
+            length: GRID_HEIGHT,
+          }).map((_, row) =>
+            Array.from({
+              length: GRID_WIDTH,
+            }).map((_, col) => {
+              const isSnakeHead =
               snake[0]?.x === col &&
               snake[0]?.y === row;
-
-            const snakeIndex =
+              
+              const snakeIndex =
               snake.findIndex(
                 (segment) =>
                   segment.x === col &&
-                  segment.y === row
+                segment.y === row
               );
-
-            const isSnakeBody =
+              
+              const isSnakeBody =
               snakeIndex > 0;
-
-            const isFruit =
+              
+              const isFruit =
               fruit.x === col &&
               fruit.y === row;
-
-            return (
-              <div
+              
+              return (
+                <div
                 key={`${col}-${row}`}
                 className={`
                   cell
                   ${
-                    isSnakeHead
+                      isSnakeHead
                       ? "snake-head"
-                      : ""
-                  }
-                  ${
-                    isSnakeBody
-                      ? "snake-body"
-                      : ""
-                  }
-                  ${isFruit ? "fruit" : ""}
-                `}
-                style={{
-                  opacity:
-                    snakeIndex >= 0
-                      ? 1 - snakeIndex * 0.03
-                      : 1,
-                }}
-              >
-                {isSnakeHead && (
-                  <div className="eyes">
-                    <span />
-                    <span />
-                  </div>
-                )}
-              </div>
-            );
-          })
-        )}
+                        : ""
+                      }
+                      ${
+                        isSnakeBody
+                        ? "snake-body"
+                        : ""
+                      }
+                      ${isFruit ? "fruit" : ""}
+                      `}
+                      style={{
+                        opacity:
+                        snakeIndex >= 0
+                        ? 1 - snakeIndex * 0.03
+                        : 1,
+                      }}
+                      >
+                  {isSnakeHead && (
+                    <div className="eyes">
+                      <span />
+                      <span />
+                    </div>
+                  )}
+                </div>
+              );
+            })
+          )}
 
-        {!gameStarted && !gameOver && (
-          <div className="overlay">
-            <h2>Ready?</h2>
+          {!gameStarted && !gameOver && (
+            <div className="overlay">
+              <h2>Ready?</h2>
 
-            <button
-              className="btn"
-              onClick={startGame}
-            >
-              Start Game
-            </button>
-          </div>
-        )}
+              <button
+                className="btn"
+                onClick={startGame}
+                >
+                Start Game
+              </button>
+            </div>
+          )}
 
-        {paused && (
-          <div className="overlay">
-            <h2>Paused</h2>
-            <p>Resume when ready</p>
-          </div>
-        )}
+          {paused && (
+            <div className="overlay">
+              <h2>Paused</h2>
+              <p>Resume when ready</p>
+            </div>
+          )}
 
-        {gameOver && (
-          <div className="overlay">
-            <h2>Game Over</h2>
+          {gameOver && (
+            <div className="overlay">
+              <h2>Game Over</h2>
 
-            <p>Score: {score}</p>
+              <p>Score: {score}</p>
 
-            <button
-              className="btn"
-              onClick={startGame}
-            >
-              Play Again
-            </button>
-          </div>
-        )}
-      </div>
-
-      {isMobile && gameStarted && !gameOver && (
-        <div className="mobile-controls">
-          <button
-            className="mobile-btn"
-            onClick={togglePause}
-          >
-            {paused ? "Resume" : "Pause"}
-          </button>
-
-          <button
-            className="mobile-btn"
-            onClick={startGame}
-          >
-            Restart
-          </button>
+              <button
+                className="btn"
+                onClick={startGame}
+                >
+                Play Again
+              </button>
+            </div>
+          )}
         </div>
-      )}
 
-      <div className="controls">
-        {isMobile ? (
-          <p>Swipe to control the snake</p>
-        ) : (
-          <p>
-            WASD / Arrow Keys • SPACE Pause • R
-            Restart
-          </p>
+        {isMobile && gameStarted && !gameOver && (
+          <div className="mobile-controls">
+            <button
+              className="mobile-btn"
+              onClick={togglePause}
+              >
+              {paused ? "Resume" : "Pause"}
+            </button>
+
+            <button
+              className="mobile-btn"
+              onClick={startGame}
+              >
+              Restart
+            </button>
+          </div>
         )}
+
+        <div className="controls">
+          {isMobile ? (
+            <p>Swipe to control the snake</p>
+          ) : (
+            <p>
+              WASD / Arrow Keys • SPACE Pause • R
+              Restart
+            </p>
+          )}
+        </div>
       </div>
-      <a
-  href="https://github.com/mitesh006"
-  target="_blank"
-  rel="noopener noreferrer"
-  className="github-link"
->
-  Built by mitesh006
-</a>
+      <footer>
+        <a
+          href="https://github.com/mitesh006"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="github-link"
+          >
+          Built by mitesh006
+        </a>
+      </footer>
     </div>
   );
 }
