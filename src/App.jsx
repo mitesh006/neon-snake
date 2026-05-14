@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useRef, useState} from "react";
 import "./App.css";
 
 
@@ -32,6 +32,29 @@ const CELL_SIZE = isMobile
       y: Math.floor(GRID_HEIGHT / 2),
     },
   ];
+
+  const generateFruit = useCallback((snakeBody) => {
+    while (true) {
+    const position = {
+      x: Math.floor(
+        Math.random() * GRID_WIDTH
+      ),
+      y: Math.floor(
+        Math.random() * GRID_HEIGHT
+      ),
+    };
+
+    const overlaps = snakeBody.some(
+      (segment) =>
+        segment.x === position.x &&
+        segment.y === position.y
+    );
+
+    if (!overlaps) {
+      return position;
+    }
+  }
+}, [GRID_WIDTH]);
 
   const [snake, setSnake] = useState(initialSnake);
 
@@ -77,30 +100,8 @@ const CELL_SIZE = isMobile
     pausedRef.current = paused;
   }, [gameStarted, gameOver, paused]);
 
-  function generateFruit(snakeBody) {
-    let position;
-
-    do {
-      position = {
-        x: Math.floor(
-          Math.random() * GRID_WIDTH
-        ),
-        y: Math.floor(
-          Math.random() * GRID_HEIGHT
-        ),
-      };
-    } while (
-      snakeBody.some(
-        (segment) =>
-          segment.x === position.x &&
-          segment.y === position.y
-      )
-    );
-
-    return position;
-  }
-
-  const startGame = () => {
+  
+    const startGame = useCallback(() => {
     const freshSnake = [
       {
         x: Math.floor(GRID_WIDTH / 2),
@@ -126,8 +127,7 @@ const CELL_SIZE = isMobile
     setGameOver(false);
 
     setGameStarted(true);
-  };
-
+}, [generateFruit, GRID_WIDTH]);
   const togglePause = () => {
     if (
       !gameStartedRef.current ||
@@ -251,7 +251,7 @@ const CELL_SIZE = isMobile
         handleKeyPress
       );
     };
-  }, []);
+  }, [startGame]);
 
   useEffect(() => {
     if (
@@ -381,6 +381,8 @@ const CELL_SIZE = isMobile
     speed,
     score,
     bestScore,
+    generateFruit,
+    GRID_WIDTH
   ]);
 
   return (
