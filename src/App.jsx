@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import "./App.css";
 
 
@@ -539,6 +539,14 @@ const CELL_SIZE = isMobile
           </p>
         )}
       </div>
+      <a
+  href="https://github.com/mitesh006"
+  target="_blank"
+  rel="noopener noreferrer"
+  className="github-link"
+>
+  Built by mitesh006
+</a>
     </div>
   );
 }

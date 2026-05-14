@@ -1,4 +1,23 @@
 
+.github-link{
+  color: var(--muted);
+  position: fixed;
+  right: 40px;
+  bottom: 20px;
+
+  text-decoration: none;
+
+  font-size: 0.85rem;
+
+  transition: 0.25s;
+}
+
+.github-link:hover{
+  color: var(--snake);
+
+  text-shadow:
+    0 0 10px var(--snake-glow);
+}
 
 .game-container{
   min-height:100vh;

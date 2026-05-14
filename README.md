@@ -81,7 +81,7 @@ npm run dev
 
 ## 🌐 Live Demo
 
-[Play Here](YOUR_DEPLOY_LINK)
+[Play Here]()
 
 ---
 
@@ -89,16 +89,5 @@ npm run dev
 
 You can check out the original C++ terminal implementation here:
 
-[Terminal Snake Game](YOUR_OLD_REPO_LINK)
+[Terminal Snake Game](https://github.com/mitesh006/Snake_Game)
 
----
-
-## 📸 Preview
-
-(Add screenshots or gameplay GIF here)
-
----
-
-## 📄 License
-
-MIT
