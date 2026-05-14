@@ -81,7 +81,7 @@ npm run dev
 
 ## 🌐 Live Demo
 
-[Play Here]()
+[Play Here](https://neon-snake-tan.vercel.app/)
 
 ---
 
