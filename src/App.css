@@ -301,6 +301,10 @@ h1{
     letter-spacing:6px; 
   }
 
+  .game-container {
+    min-height: 85vh;
+  }
+
   .top-bar{
     gap:0.5rem;
   }
